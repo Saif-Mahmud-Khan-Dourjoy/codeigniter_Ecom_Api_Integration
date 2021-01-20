@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+
+
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <title>Aaurhi | The power boutique</title>
+    <!-- Core Stylesheet-->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Sidenav Black Overlay-->
+    <div class="sidenav-black-overlay"></div>
+    <!-- Side Nav Wrapper-->
+    <div class="suha-sidenav-wrapper " id="sidenavWrapper">
+        <!-- Sidenav Profile-->
+        <div class="sidenav-profile">
+            <!-- <div class="user-profile"><img src="img/bg-img/9.jpg" alt=""></div> -->
+            <div class="user-info mt-5">
+                <h6 class="user-name mb-0"><span id="name"></span> <span id="surname"></span></h6>
+            </div>
+        </div>
+        <!-- Sidenav Nav-->
+        <ul class="sidenav-nav">
+            <li><a href="profile.html"><i class="icofont-star"></i>My Profile</a></li>
+            <li><a href="cart.html"><i class="icofont-cart"></i>My Cart</a></li>
+            <li><a href="wishlist.html"><i class="icofont-heart"></i>My Wishlist</a></li>
+            <li><a href="order-history.html"><i class="icofont-heart"></i>Order History</a></li>
+            <li id="log"></li>
+            <li id="contact_info" class="contact-info"></li>
+            <li class="map-loc">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d912.7856210567049!2d90.41537900477923!3d23.77793999409084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c7aa0cf20d5f%3A0x684bd10d58bfb103!2sAaurhi-The%20POWER%20Boutique!5e0!3m2!1sen!2sbd!4v1595152337319!5m2!1sen!2sbd"
+                    width="100%" height="180" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            </li>
+        </ul>
+        <!-- Go Back Button-->
+        <div class="go-home-btn" id="goHomeBtn"><i class="icofont-rounded-left"></i></div>
+    </div>
+    <!-- Header Area-->
+    <div class="header-area" id="headerArea">
+        <div class="container h-100 d-flex align-items-center justify-content-between">
+            <!-- Back Button-->
+            <div class="back-button"><a type="button" onclick="history.go(-1)"><i class="icofont-arrow-left"></i>Back</a></div>
+            <!-- Page Title-->
+            <div class="page-heading">
+                <h6 class="mb-0"></h6>
+            </div>
+        </div>
+    </div>
+    <div class="page-content-wrapper">
+        <div class="product-slides owl-carousel" id="productimg">
+        </div>
+        <div class="product-description pb-3" id="productdetails">
+
+        </div>
+    </div>
+    <!-- Footer Nav-->
+    <div class="footer-nav-area" id="footerNav">
+        <div class="suha-footer-nav h-100">
+            <ul class="h-100 d-flex align-items-center justify-content-between">
+
+                <li>
+                    <a href="home.html"><i class="icofont-home icofont-2x"></i></a>
+                </li>
+                <li>
+                    <a href="search.html"><i class="icofont-search icofont-1p3x"></i></a>
+                </li>
+                <li>
+                    <a data-toggle="modal" data-target="#cart"><i class="icofont-cart icofont-2x"><sup><span class="total-count"></span></sup></i></a>
+                </li>
+                <li>
+                    <div class="text-center" id="suhaNavbarToggler">
+                        <i class="icofont-user icofont-1p3x"></i></div>
+                </li>
+                <!-- Navbar Toggler-->
+
+            </ul>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel">Cart</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <div class="modal-body">
+                    <table class="show-cart table">
+
+                    </table>
+                    <hr>
+                    <div class="cart-total text-right">Total : ৳<span class="total-cart"></span></div>
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-primary btn-sm clear-cart">Cancel</a>
+                    <a type="button" href="cart.html" class="btn btn-danger btn-sm">View cart</a>
+                    <a type="button" href="checkout.html" class="btn btn-warning btn-sm">Order now</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- All JavaScript Files-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/ajax.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/default/active.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+    <script>
+        $(document).ready(function() {
+            / PREPARE THE SCRIPT /
+
+            var url_string = window.location;
+            var url = new URL(url_string);
+            var name = url.searchParams.get("name");
+            var id = url.searchParams.get("id");
+            get_uc_details(id);
+            get_uc_image(id);
+        });
+        var userid = localStorage.getItem("user_id");
+
+        if (!userid || userid == undefined || userid == "") {
+            var output = "";
+            output += '<a href="login.html"><i class="icofont-login"></i>Login</a>';
+            $('#log').html(output);
+        } else {
+            var output = "";
+            output += '<a href="" id="logout"><i class="icofont-logout"></i>Logout</a>';
+            $('#log').html(output);
+
+            get_user_info(userid);
+        }
+
+        $("#logout").click(function() {
+
+            localStorage.clear();
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            setInterval(function() {
+                if (!navigator.onLine) {
+                    window.location.href = "index.html";
+                }
+            }, 3000);
+        })
+    </script>
+    <script>
+        var shoppingCart = (function() {
+            // =============================
+            // Private methods and propeties
+            // =============================
+            cart = [];
+
+            // Constructor
+            function Item(shipping_cost, id, name, price, count) {
+                this.id = id;
+                this.shipping_cost = shipping_cost;
+                this.name = name;
+                this.price = price;
+                this.count = count;
+            }
+
+            // Save cart
+            function saveCart() {
+                sessionStorage.setItem('shoppingCart', JSON.stringify(cart));
+            }
+
+            // Load cart
+            function loadCart() {
+                cart = JSON.parse(sessionStorage.getItem('shoppingCart'));
+            }
+            if (sessionStorage.getItem("shoppingCart") != null) {
+                loadCart();
+            }
+
+
+            // =============================
+            // Public methods and propeties
+            // =============================
+            var obj = {};
+
+            // Add to cart
+            obj.addItemToCart = function(shipping_cost, id, name, price, count) {
+                    for (var item in cart) {
+                        if (cart[item].name === name) {
+                            cart[item].count++;
+                            saveCart();
+                            return;
+                        }
+                    }
+                    //alert(shipping_cost);
+                    var item = new Item(shipping_cost, id, name, price, count);
+                    cart.push(item);
+                    saveCart();
+                }
+                // Set count from item
+            obj.setCountForItem = function(name, count) {
+                for (var i in cart) {
+                    if (cart[i].name === name) {
+                        cart[i].count = count;
+                        break;
+                    }
+                }
+            };
+            // Remove item from cart
+            obj.removeItemFromCart = function(name) {
+                for (var item in cart) {
+                    if (cart[item].name === name) {
+                        cart[item].count--;
+                        if (cart[item].count === 0) {
+                            cart.splice(item, 1);
+                        }
+                        break;
+                    }
+                }
+                saveCart();
+            }
+
+            // Remove all items from cart
+            obj.removeItemFromCartAll = function(name) {
+                for (var item in cart) {
+                    if (cart[item].name === name) {
+                        cart.splice(item, 1);
+                        break;
+                    }
+                }
+                saveCart();
+            }
+
+            // Clear cart
+            obj.clearCart = function() {
+                cart = [];
+                saveCart();
+            }
+
+            // Count cart 
+            obj.totalCount = function() {
+                var totalCount = 0;
+                for (var item in cart) {
+                    totalCount += cart[item].count;
+                }
+                return totalCount;
+            }
+
+            // Total cart
+            obj.totalCart = function() {
+                var totalCart = 0;
+                for (var item in cart) {
+                    totalCart += cart[item].price * cart[item].count;
+                }
+                return Number(totalCart.toFixed(2));
+            }
+
+            // List cart
+            obj.listCart = function() {
+                var cartCopy = [];
+                for (i in cart) {
+                    item = cart[i];
+                    itemCopy = {};
+                    for (p in item) {
+                        itemCopy[p] = item[p];
+
+                    }
+                    itemCopy.total = Number(item.price * item.count).toFixed(2);
+                    cartCopy.push(itemCopy)
+                }
+                return cartCopy;
+            }
+
+            // cart : Array
+            // Item : Object/Class
+            // addItemToCart : Function
+            // removeItemFromCart : Function
+            // removeItemFromCartAll : Function
+            // clearCart : Function
+            // countCart : Function
+            // totalCart : Function
+            // listCart : Function
+            // saveCart : Function
+            // loadCart : Function
+            return obj;
+        })();
+
+
+        // *****************************************
+        // Triggers / Events
+        // ***************************************** 
+        // Add item
+        $('.add-to-cart').click(function(event) {
+            event.preventDefault();
+            var shipping_cost = $(this).data('shipping_cost');
+            var id = Number($(this).data('id'));
+            var name = $(this).data('name');
+            var price = Number($(this).data('price'));
+            shoppingCart.addItemToCart(shipping_cost, id, name, price, 1);
+            displayCart();
+        });
+
+        // Clear items
+        $('.clear-cart').click(function() {
+            shoppingCart.clearCart();
+            displayCart();
+        });
+
+
+        function displayCart() {
+            var cartArray = shoppingCart.listCart();
+            console.log(cartArray);
+            var output = "";
+            for (var i in cartArray) {
+                var pr_name = cartArray[i].name.split('^').join(' ');
+                output += "<tr>" +
+                    "<td>" + pr_name + "</td>" +
+                    "<td>(" + cartArray[i].price + ")</td>" +
+                    "<td><div class='input-group'><button class='minus-item input-group-addon btn btn-primary' data-name=" + cartArray[i].name + ">-</button>" +
+                    "<input type='number' class='item-count' data-name='" + cartArray[i].name + "' value='" + cartArray[i].count + "'>" +
+                    "<button class='plus-item btn btn-primary input-group-addon' data-name=" + cartArray[i].name + ">+</button></div></td>" +
+                    " = " +
+                    "<td>" + cartArray[i].total + "</td>" +
+                    "<td><button class='delete-item btn btn-danger btn-sm' data-name=" + cartArray[i].name + ">X</button></td>" +
+                    "</tr>";
+            }
+            $('.show-cart').html(output);
+            $('.total-cart').html(shoppingCart.totalCart());
+            $('.total-count').html(shoppingCart.totalCount());
+        }
+
+        // Delete item button
+
+        $('.show-cart').on("click", ".delete-item", function(event) {
+            var name = $(this).data('name')
+            shoppingCart.removeItemFromCartAll(name);
+            displayCart();
+        })
+
+
+        // -1
+        $('.show-cart').on("click", ".minus-item", function(event) {
+                var name = $(this).data('name')
+                shoppingCart.removeItemFromCart(name);
+                displayCart();
+            })
+            // +1
+        $('.show-cart').on("click", ".plus-item", function(event) {
+            var shipping_cost = $(this).data('shipping_cost');
+            var id = Number($(this).data('id'));
+            var name = $(this).data('name');
+            var price = Number($(this).data('price'));
+            shoppingCart.addItemToCart(shipping_cost, id, name, price);
+            displayCart();
+        })
+
+        // Item count input
+        $('.show-cart').on("change", ".item-count", function(event) {
+            var name = $(this).data('name');
+            var count = Number($(this).val());
+            shoppingCart.setCountForItem(name, count);
+            displayCart();
+        });
+
+        displayCart();
+    </script>
+    <script>
+        $.ajax({
+            url: "https://aaurhi.com/api/get_contact_info",
+            type: "get",
+            dataType: 'HTML',
+            success: function(related) {
+
+                $('#contact_info').html(related);
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Customer Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- <script src="https://use.fontawesome.com/3158daa833.js"></script> -->
+    <script src="https://kit.fontawesome.com/321f07098e.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="profile"></div>
+
+
+    </div>
+    <div class="container-fluid mt-5">
+        <div class="row text-right">
+            <div class="col">
+                <button class="text-dark btn btn-info btn-lg" data-toggle="modal" data-target="#history"> History Status <i class="fas fa-list-ul "></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Nav-->
+    <div class="footer-nav-area" id="footerNav">
+        <div class="suha-footer-nav h-100">
+            <ul class="h-100 d-flex align-items-center justify-content-between">
+
+                <li>
+                    <a href="home.html" class="active"><i class="icofont-home icofont-2x"></i></a>
+                </li>
+                <li>
+                    <a href="search.html"><i class="icofont-search icofont-1p3x"></i></a>
+                </li>
+                <li>
+                    <a data-toggle="modal" data-target="#cart"><i class="icofont-cart icofont-2x"><sup><span class="total-count"></span></sup></i></a>
+                </li>
+                <li>
+                    <div class="text-center" id="suhaNavbarToggler">
+                        <i class="icofont-user icofont-1p3x"></i></div>
+                </li>
+                <!-- Navbar Toggler-->
+
+            </ul>
+        </div>
+    </div>
+    <div class="modal fade" id="history" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">History Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                </div>
+                <div class="modal-body text-center">
+
+                    <a href="order-history.html" class="btn btn-warning ">My Order History</a>
+                    <a href="review-status.html" class="btn btn-success mx-5 ">Review Status</a>
+                    <a href="wishlist.html" class="btn btn-danger" id="logout">Wishlist</a>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            user_id = localStorage.getItem("user_id");
+            // console.log(user_id);
+
+            $.ajax({
+                url: "https://aaurhi.com/users/profile/" + user_id,
+                type: "get",
+                dataType: 'html',
+                success: function(data) {
+
+                    var dataes = JSON.parse(data);
+
+                    var output = "";
+
+                    output += '<div class="container mt-5"><div><span class="text-left font-weight-bold" >UserName : </span><span class="text-right">' + dataes[0].username + '</span></div><div><span class="text-left font-weight-bold">SurName : </span><span class="text-right">' + dataes[0].surname + '</span></div><div><span class="text-left font-weight-bold">Email : </span><span class="text-right">' + dataes[0].email + '</span></div><div><span class="text-left font-weight-bold">Phone : </span><span class="text-right">' + dataes[0].phone + '</span></div> '
+
+
+
+
+                    $("#profile").html(output);
+
+
+
+                }
+
+
+
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Settings</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- <script src="https://use.fontawesome.com/3158daa833.js"></script> -->
+<script src="https://kit.fontawesome.com/321f07098e.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container-fluid mt-5">
+    <div class="row text-right">
+        <div class="col">
+          <button class="text-dark btn btn-info btn-lg" data-toggle="modal" data-target="#setting"> Settings <i class="fas fa-cogs "></i></button>
+        </div>
+    </div>
+    </div>
+    <div class="modal fade" id="setting" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      	
+       <a href="registration.html" class="btn btn-warning ">Registreation</a>
+       <a href="login.html" class="btn btn-success mx-5 ">Login</a> 
+       <a href="" class="btn btn-danger" id="logout">Logout</a>
+
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<script type="text/javascript">
+  $(document).ready(function(){
+       $("#logout").click(function(){
+         
+         localStorage.clear();
+
+       });
+
+  });
+
+
+</script>
+	
+</body>
+</html>

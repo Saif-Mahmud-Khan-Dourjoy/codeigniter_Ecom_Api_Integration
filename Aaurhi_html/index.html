@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+
+
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <title>Aaurhi | The power boutique</title>
+    <!-- Core Stylesheet-->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="intro-wrapper d-flex align-items-center justify-content-center text-center">
+        <!-- Background Shape-->
+        <div class="background-shape"></div>
+        <div class="container"><img class="big-logo" src="img/logo.png" alt=""></div>
+    </div>
+    <!-- All JavaScript Files-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script>
+        $(document).ready(function() {
+            setInterval(function() {
+                if (navigator.onLine) {
+                    window.location.href = "home.html";
+                } else {
+                    alert('Please check internet connection');
+                }
+            }, 3000);
+        })
+    </script>
+</body>
+
+</html>

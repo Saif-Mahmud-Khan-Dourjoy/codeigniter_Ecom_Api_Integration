@@ -1,0 +1,119 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Products</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+    <!-- Core Stylesheet-->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- Core Stylesheet-->
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" href="style.css">
+
+    <style type="text/css">
+        #img {
+            height: 100;
+            width: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Area-->
+    <div class="header-area" id="headerArea">
+        <div class="container h-100 d-flex align-items-center justify-content-between">
+            <!-- Logo Wrapper-->
+            <div class="logo-wrapper">
+                <a href="index.html" id="logo"><img src="img/logo.png" alt=""></a>
+            </div>
+            <!-- Search Form-->
+            <div class="top-search-form">
+                <form action="#" method="POST">
+                    <input class="form-control" type="search" placeholder="Enter your keyword">
+                    <button type="submit"><i class="icofont-search"></i></button>
+                </form>
+            </div>
+            <!-- Navbar Toggler-->
+            <div class="suha-navbar-toggler d-flex justify-content-between flex-wrap" id="suhaNavbarToggler">
+                <i class="icofont-navigation-menu icofont-1p3x icofont-blue"></i></div>
+        </div>
+    </div>
+    <!-- Sidenav Black Overlay-->
+    <div class="sidenav-black-overlay"></div>
+    <!-- Side Nav Wrapper-->
+    <div class="suha-sidenav-wrapper" id="sidenavWrapper">
+        <!-- Sidenav Profile-->
+        <div class="sidenav-profile">
+            <!-- <div class="user-profile"><img src="img/bg-img/9.jpg" alt=""></div> -->
+            <div class="user-info mt-5">
+                <h6 class="user-name mb-0"><span id="name"></span> <span id="surname"></span></h6>
+            </div>
+        </div>
+        <!-- Sidenav Nav-->
+        <ul class="sidenav-nav">
+            <li><a href="profile.html"><i class="icofont-star"></i>My Profile</a></li>
+            <li><a href="cart.html"><i class="icofont-cart"></i>My Cart</a></li>
+            <li><a href="order-history.html"><i class="icofont-heart"></i>Order History</a></li>
+        </ul>
+        <!-- Go Back Button-->
+        <div class="go-home-btn" id="goHomeBtn"><i class="icofont-rounded-left"></i></div>
+    </div>
+    <div class="container">
+        <br />
+        <br />
+        <br />
+        <h2 align="center">Find Your Product</h2><br />
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">Search</span>
+                <input type="text" name="search_text" id="search_text" placeholder="Search by product" class="form-control" onkeyup="myfunction()" />
+            </div>
+        </div>
+        <br />
+        <div id="result"></div>
+    </div>
+    <div style="clear:both"></div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/ajax.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript">
+        function myfunction() {
+            var val = document.getElementById('search_text').value;
+
+            $.ajax({
+                url: "https://aaurhi.com/search/get_products_all",
+                type: "get",
+                data: {
+                    'search_text': val
+                },
+                dataType: 'html',
+                success: function(data) {
+
+                    $('#result').html(data);
+
+                }
+            });
+        };
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            setInterval(function() {
+                if (!navigator.onLine) {
+                    window.location.href = "index.html";
+                }
+            }, 3000);
+        })
+    </script>
+</body>
+
+</html>

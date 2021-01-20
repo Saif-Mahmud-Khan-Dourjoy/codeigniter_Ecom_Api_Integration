@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">   
+<head>
+  <title>Order History</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
+    <link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" />
+</head>
+<body>
+
+<div class="container">
+  <h2 class="text-center text-warning mt-5 text-uppercase"> Ordered Product </h2>
+ 
+    <table class="table table-bordered table-sm mt-5" >
+    <thead>
+      <tr>
+        <th>SL</th>
+        <th>Product Title</th>
+        <th>Product Price</th>
+        <th>Quantity</th>
+        <th>Sub Total</th>
+      </tr>
+    </thead>
+    <tbody id="ordered_product">
+      
+    </tbody>
+  </table>
+</div>
+<script type="text/javascript">
+   var userid = localStorage.getItem("user_id");
+
+    $.ajax({
+             url:"https://aaurhi.com/orderedproduct/getOrderHistory/"+userid,
+             type:"get",
+            dataType:'html',
+             success:function(data){
+
+                   var dataes=JSON.parse(data);
+                   var pro_det=dataes[0].product_details;
+                   var product_det=JSON.parse(pro_det);
+                    var output=" ";
+                   for(var i=0; i<product_det.length; i++){
+                    var title=product_det[i].name;
+                    var titlenew=title.replace(/_/g, ' ');
+                    var price=product_det[i].price;
+                    var quantity=product_det[i].qty;
+                    var SubTotal=product_det[i].subtotal;
+
+                     output+='<tr><td>'+(i+1)+'</td><td><a href="single-product.html?id='+product_det[i].id+'">'+titlenew+'</a></td><td>'+price+'</td><td>'+quantity+'</td><td>'+SubTotal+'</td><tr>';
+
+                     $('#ordered_product').html(output); 
+
+                   }
+             }
+
+            });
+ 
+
+</script>
+
+<!-- <td class="text-center"><button class="btn btn-success add_to_cart" data-name='+dataes[i].medicine_name+' data-price='+dataes[i].price+'>Add To Cart </button></td> -->
+

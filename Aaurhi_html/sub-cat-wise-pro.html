@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+
+
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <title>Aaurhi | The power boutique</title>
+    <!-- Core Stylesheet-->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="top-products-area mt-3">
+            <div class="container">
+                <div class="section-heading d-flex align-items-center justify-content-between">
+                    <h6 class="ml-1">Sub Catagory Products</h6>
+                </div>
+                <div class="row" id="showSubCategoryProduct">
+                </div>
+            </div>
+        </div>
+
+ <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/ajax.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+   
+    <script type="text/javascript">
+        var url_string = window.location;
+        var url = new URL(url_string);
+        var id = url.searchParams.get("id");
+     //    console.log(id);
+      //    return false;
+    	$.ajax({
+             url:"https://aaurhi.com/product/get_all_sub_category_product/"+id,
+             type:"get", 
+            dataType:'html',
+             success:function(data){
+             
+              $('#showSubCategoryProduct').html(data);
+             
+             }
+            });                             
+    </script>
+</body>	
+</html>
